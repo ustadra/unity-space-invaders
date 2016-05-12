@@ -3,8 +3,12 @@ using System.Collections;
 
 public class ControlAlien : MonoBehaviour
 {
-	// Conexión al marcador, para poder actualizarlo
-	public GameObject marcador;
+    
+
+    // Use this for initialization
+   
+    // Conexión al marcador, para poder actualizarlo
+    public GameObject marcador;
 
 	// Por defecto, 100 puntos por cada alien
 	public int puntos = 100;
@@ -19,8 +23,12 @@ public class ControlAlien : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	
-	}
+        
+        }
+
+
+
+    
 
 	void OnCollisionEnter2D (Collision2D coll)
 	{
