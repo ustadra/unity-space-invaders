@@ -2,20 +2,18 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class GeneradorAliens : MonoBehaviour
-{
-
+public class GeneradorGameOver : MonoBehaviour {
     // Publicamos la variable para conectarla desde el editor
-    public Rigidbody2D prefabAlien1;
-   
+    public Rigidbody2D prefabAlienn2;
+
 
     // Referencia para guardar una matriz de objetos
     private Rigidbody2D[,] aliens;
 
     // Tamaño de la invasión alienígena
-    private  int FILAS = 4;
+    private int FILAS = 4;
     private const int COLUMNAS = 7;
-    
+
 
     // Enumeración para expresar el sentido del movimiento
     private enum direccion { IZQ, DER };
@@ -36,24 +34,20 @@ public class GeneradorAliens : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+
         string escena = SceneManager.GetActiveScene().name;
-        if (escena.Equals("Nivel1")){
+        if (escena.Equals("Nivel1"))
+        {
 
         }
-        if (escena.Equals("Nivel2")) {
-            velocidad = velocidad + 10;
-            FILAS = 5;
-        }
-        if (escena.Equals("Nivel3"))
+        if (escena.Equals("Nivel2"))
         {
             velocidad = velocidad + 10;
             FILAS = 5;
         }
-            // Rejilla de 4x7 aliens
+        // Rejilla de 4x7 aliens
+        generarAliens(FILAS, COLUMNAS, 1.5f, 1.0f);
 
-            generarAliens(FILAS, COLUMNAS, 1.5f, 1.0f);
-        
         // Calculamos la anchura visible de la cámara en pantalla
         float distanciaHorizontal = Camera.main.orthographicSize * Screen.width / Screen.height;
 
@@ -65,7 +59,10 @@ public class GeneradorAliens : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        if (SceneManager.GetActiveScene().name.Equals("GameOVer")){
+
+
+        } else {
             // Contador para saber si hemos terminado
             int numAliens = 0;
 
@@ -112,18 +109,12 @@ public class GeneradorAliens : MonoBehaviour
 
                             }
                         }
-                    if (aliens[i, j].transform.position.y < -4.5f)
-                    {
-                        numAliens = -1;
-                        i = FILAS;
-                        j = COLUMNAS;
-                    }
                     }
                 }
             }
 
             // Si no quedan aliens, hemos terminado
-            if (numAliens == 0  )
+            if (numAliens == 0)
             {
                 if (SceneManager.GetActiveScene().name.Equals("Nivel1"))
                 {
@@ -132,36 +123,8 @@ public class GeneradorAliens : MonoBehaviour
 
 
                 }
-            if (SceneManager.GetActiveScene().name.Equals("Nivel2"))
-            {
-
-                SceneManager.LoadScene("Nivel3");
-
 
             }
-            if (SceneManager.GetActiveScene().name.Equals("Nivel3"))
-            {
-
-                SceneManager.LoadScene("Nivel3");
-
-
-            }
-
-        }
-        if (numAliens == -1)
-        {
-            Vidas.contador = Vidas.contador - 1;
-            if (Vidas.contador == 0)
-            {
-                SceneManager.LoadScene("Menu");
-                Vidas.contador = 3;
-                
-            }
-            else
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-        }
 
             // Si al menos un alien ha tocado el borde, todo el pack cambia de rumbo
             if (limiteAlcanzado == true)
@@ -192,7 +155,7 @@ public class GeneradorAliens : MonoBehaviour
                     rumbo = direccion.DER;
                 }
             }
-        
+        }
     }
 
     void generarAliens(int filas, int columnas, float espacioH, float espacioV, float escala = 1.0f)
@@ -220,7 +183,7 @@ public class GeneradorAliens : MonoBehaviour
                 Vector2 posicion = new Vector2(origen.x + (espacioH * j), origen.y + (espacioV * i));
 
                 // Instanciamos el objeto partiendo del prefab
-                Rigidbody2D alien = (Rigidbody2D)Instantiate(prefabAlien1, posicion, transform.rotation);
+                Rigidbody2D alien = (Rigidbody2D)Instantiate(prefabAlienn2, posicion, transform.rotation);
 
                 // Guardamos el alien en el array
                 aliens[i, j] = alien;
@@ -232,6 +195,6 @@ public class GeneradorAliens : MonoBehaviour
         }
 
     }
-    
+
 
 }

@@ -16,6 +16,10 @@ public class ControlDisparo : MonoBehaviour
 		// Eliminamos el objeto si se sale de la pantalla
 		if (transform.position.y > 10) {
 			Destroy (gameObject);
-		}	
-	}
+		}
+        if (transform.position.y < -10)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

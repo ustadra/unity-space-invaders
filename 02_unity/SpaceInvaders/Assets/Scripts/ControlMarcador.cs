@@ -26,8 +26,8 @@ public class ControlMarcador : MonoBehaviour
 	void Update ()
 	{
 		// Actualizamos el marcador
-		t.text = SceneManager.GetActiveScene().name+"   Puntos: " + puntos.ToString () + "\n";
-        v.text = "Vidas: " + vida.ToString() + "\n";
+		t.text = SceneManager.GetActiveScene().name+"   Puntos: " + Vidas.puntos + "\n";
+        v.text = "Vidas: " + Vidas.contador + "\n";
     }
 
 }
